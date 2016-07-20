@@ -34,6 +34,6 @@ class ExplicitDiffusion:
 				else:
 					phi_u = self.rho_K_boundary[i]*(y[k,i+1]-y[k,i])/self.dz
 					phi_l = self.rho_K_boundary[i-1]*(y[k,i]-y[k,i-1])/self.dz;
-				y_new[k,i]= y[k,i] - (phi_u-phi_l)*dt/(self.dz*self.rho[i])
+				y_new[k,i]= y[k,i] + (phi_u-phi_l)*dt/(self.dz*self.rho[i])
 		return y_new
 		

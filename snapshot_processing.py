@@ -16,7 +16,7 @@ class SnapshotProcessing:
 			self.x[:,i] = self.y[:,i]/self.gas.molecular_weights*self.gas.mean_molecular_weight
 			self.x_eq[:,i] = self.y_eq[:,i]/self.gas.molecular_weights*self.gas.mean_molecular_weight
 
-	def Plot(self,species_names,fig_name):
+	def Plot(self,species_names,output_fig_path):
 		n = len(species_names)
 		species_indices = []
 		for species_name in species_names:
@@ -43,10 +43,10 @@ class SnapshotProcessing:
 		ax2.set_xlabel('X')
 		ax2.set_ylabel('P(Pa)')
 		ax2.legend(loc=3)
-		plt.savefig(fig_name)
+		plt.savefig(output_fig_path)
 		print "snapshot saved successfully"
 
-	def SaveData(self,species_names,output_file_name,header_variable_names):
+	def SaveData(self,species_names,output_file_path,header_variable_names):
 		# change to mole fractions
 	    x_selected_species = np.zeros((len(species_names),self.grid.N))
 	    i=0
@@ -55,7 +55,7 @@ class SnapshotProcessing:
 	        i=i+1
 	    data = np.array([self.grid.z,self.grid.PG,self.grid.T])
 	    data = np.transpose(np.concatenate((data,x_selected_species),axis=0))
-	    np.savetxt(output_file_name,data,fmt='%.8e',header = header_variable_names)
+	    np.savetxt(output_file_path,data,fmt='%.8e',header = header_variable_names)
 	    print "File written successfully"
 
 
